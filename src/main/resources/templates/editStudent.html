@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Añadir estudiante</title>
+<link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
+<style>
+	form { text-align: center; margin: auto !important;}
+	input, select, h2 {margin: auto; }
+	h2   {text-align: center; margin-top: 2rem;}
+	.form-group {margin-top: 2rem;}
+	span {color: blue; }
+	.buttonlink { margin: auto; text-align: center;}
+</style>
+<script>
+    function onSubmit(){
+        return false;
+    }
+
+    function confirmEdit() {
+       	if (confirm("¿Estás seguro/a de querer editar al estudiante?")) {
+        	document.getElementById("editForm").submit();
+        } else {
+        	window.location.href='listStudents';
+        }
+    }
+    
+    </script>
+</head>
+<body>
+	<main>
+	<form class="form-horizontal" action="#" th:action="@{/editStudentSubmit}"
+		th:object="${student}" method="post" onSubmit="return onSubmit();" id="editForm">
+		<h1>Editar estudiante</h1>
+			
+			<!-- Text input-->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="name">Nombre: </label>  
+			  <div class="col-md-2">
+			  <input id="name" name="name" th:value="${student.name}" type="text" class="form-control input-sm" readonly>
+			    
+			  </div>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="surname">Apellido/s: </label>  
+			  <div class="col-md-2">
+			  <input id="surname" name="surname" th:value="${student.surname}" type="text" class="form-control input-sm" readonly>
+			    
+			  </div>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="age">Edad</label>  
+			  <div class="col-md-2">
+			  <input id="age" name="age" th:value="${student.age}" type="number" min="1" max="100" class="form-control input-md" required>
+			    
+			  </div>
+			</div>
+			
+			<!-- Button -->
+			<div class="form-group">
+			  <div class="col-md-4">
+			    <button id="singlebutton" name="singlebutton" class="btn btn-primary" onclick="confirmEdit()">Editar</button>
+			  </div>
+			</div>
+	</form>
+	  <div class="col-md-4 buttonlink">
+	    <button name="singlebutton" class="btn btn-primary" onclick="window.location.href='listStudents';">Volver a la lista</button>
+	  </div>
+	</main>
+</body>
+</html>
